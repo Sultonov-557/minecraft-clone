@@ -1,6 +1,11 @@
 @tool
 extends MeshInstance3D
 
+var voxelMap
+
+@export
+var noice=FastNoiseLite.new()
+
 var verts = PackedVector3Array()
 var indices = PackedInt32Array()
 
@@ -15,11 +20,28 @@ var FACE_VERTICES = {
 
 @export var generate=false:
 	set(new):
-		generateMesh()
+		generate_mesh()
 	get:
 		return false
 
-func generateMesh():
+func generate_world():
+	voxelMap=[]
+	voxelMap.resize(16)
+	for x in range(16):
+		voxelMap[x]=[]
+		voxelMap[x].resize(16)
+		print(voxelMap)
+		for y in range(16):
+			voxelMap[x][y]=[]
+			voxelMap[x][y].resize(16)
+			for z in range(16):
+				var h=noice.get_noise_2d(position.x+x,position.z+z)
+				voxelMap[x][y][z]=0
+				print(x*16)
+				if(h*16>y):
+					voxelMap[x][y][z]=1
+
+func generate_mesh():
 	mesh=ArrayMesh.new()
 	FACE_VERTICES = {
 		"x+": [Vector3(1, 0, 0), Vector3(1, 0, -1), Vector3(1, 1, -1), Vector3(1, 1, 0)],
@@ -36,12 +58,18 @@ func generateMesh():
 	verts = PackedVector3Array()
 	indices = PackedInt32Array()
 	
-	add_face(Vector3(0,0,0),"x-")
-	add_face(Vector3(0,0,0),"x+")
-	add_face(Vector3(0,0,0),"z-")
-	add_face(Vector3(0,0,0),"z+")
-	add_face(Vector3(0,0,0),"y-")
-	add_face(Vector3(0,0,0),"y+")
+	generate_world()
+	for x in range(0,16):
+		for y in range(0,16):
+			for z in range(0,16):
+				if(voxelMap[x][y][z]==1):
+					add_face(Vector3(x,y,z),"x+")
+					add_face(Vector3(x,y,z),"x-")
+					add_face(Vector3(x,y,z),"z+")
+					add_face(Vector3(x,y,z),"z-")
+					add_face(Vector3(x,y,z),"y+")
+					add_face(Vector3(x,y,z),"y-")
+	
 	
 	surface_array[Mesh.ARRAY_VERTEX] = verts
 	surface_array[Mesh.ARRAY_INDEX] = indices

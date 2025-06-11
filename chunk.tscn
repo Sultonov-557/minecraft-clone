@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=4 uid="uid://d2n5kqodluh10"]
+
+[ext_resource type="Script" uid="uid://d3mdvv0vha1si" path="res://scripts/chunk.gd" id="1_kdh3y"]
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_kdh3y"]
+_surfaces = [{
+"aabb": AABB(0, 0, -1, 1, 1, 1),
+"format": 34359742465,
+"index_count": 36,
+"index_data": PackedByteArray("AgABAAAAAwACAAAABgAFAAQABwAGAAQACgAJAAgACwAKAAgADgANAAwADwAOAAwAEgARABAAEwASABAAFgAVABQAFwAWABQA"),
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 24,
+"vertex_data": PackedByteArray("AAAAAAAAAAAAAIC/AAAAAAAAAAAAAAAAAAAAAAAAgD8AAAAAAAAAAAAAgD8AAIC/AACAPwAAAAAAAAAAAACAPwAAAAAAAIC/AACAPwAAgD8AAIC/AACAPwAAgD8AAAAAAACAPwAAAAAAAIC/AAAAAAAAAAAAAIC/AAAAAAAAgD8AAIC/AACAPwAAgD8AAIC/AAAAAAAAAAAAAAAAAACAPwAAAAAAAAAAAACAPwAAgD8AAAAAAAAAAAAAgD8AAAAAAAAAAAAAAAAAAIC/AACAPwAAAAAAAIC/AACAPwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgD8AAAAAAACAPwAAgD8AAAAAAACAPwAAgD8AAIC/AAAAAAAAgD8AAIC/")
+}]
+
+[node name="Chunk" type="MeshInstance3D"]
+mesh = SubResource("ArrayMesh_kdh3y")
+script = ExtResource("1_kdh3y")

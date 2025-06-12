@@ -1,0 +1,31 @@
+[gd_scene load_steps=5 format=3 uid="uid://c7q5dveus6uub"]
+
+[ext_resource type="Script" uid="uid://34kuswixl652" path="res://scripts/World.cs" id="1_0wfyh"]
+[ext_resource type="Environment" uid="uid://c60ftq1vr6s5r" path="res://scenes/env.res" id="1_sugp2"]
+[ext_resource type="PackedScene" uid="uid://d2n5kqodluh10" path="res://scenes/chunk.tscn" id="2_sugp2"]
+
+[sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_jyhfs"]
+dof_blur_far_transition = -1.0
+
+[node name="Node3D" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = ExtResource("1_sugp2")
+camera_attributes = SubResource("CameraAttributesPractical_jyhfs")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.64679, -0.516232, 0.561398, 0, 0.736097, 0.676876, -0.762668, -0.437796, 0.4761, 0, 0, 0)
+light_indirect_energy = 0.0
+light_volumetric_fog_energy = 0.0
+light_bake_mode = 0
+
+[node name="Chunks" type="Node3D" parent="."]
+script = ExtResource("1_0wfyh")
+WorldSize = 64
+ChunkScene = ExtResource("2_sugp2")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(-0.0484136, 0, -0.998827, 0, 1, 0, 0.998827, 0, -0.0484136, -20.5954, 21.0105, 0)
+environment = ExtResource("1_sugp2")
+
+[node name="Chunk" parent="." instance=ExtResource("2_sugp2")]

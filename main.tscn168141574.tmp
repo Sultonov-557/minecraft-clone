@@ -1,0 +1,32 @@
+[gd_scene load_steps=6 format=3 uid="uid://c7q5dveus6uub"]
+
+[ext_resource type="PackedScene" uid="uid://d2n5kqodluh10" path="res://chunk.tscn" id="1_ig7tw"]
+[ext_resource type="Script" uid="uid://34kuswixl652" path="res://world.gd" id="2_0xm2m"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_ig7tw"]
+
+[sub_resource type="Sky" id="Sky_0xm2m"]
+sky_material = SubResource("ProceduralSkyMaterial_ig7tw")
+
+[sub_resource type="Environment" id="Environment_h2yge"]
+background_mode = 2
+sky = SubResource("Sky_0xm2m")
+ambient_light_source = 3
+reflected_light_source = 2
+volumetric_fog_enabled = true
+
+[node name="Node3D" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_h2yge")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.64679, -0.516232, 0.561398, 0, 0.736097, 0.676876, -0.762668, -0.437796, 0.4761, 0, 0, 0)
+shadow_enabled = true
+
+[node name="Chunks" type="Node3D" parent="."]
+script = ExtResource("2_0xm2m")
+chunkScene = ExtResource("1_ig7tw")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(-0.791778, 0, -0.610809, 0, 1, 0, 0.610809, 0, -0.791778, 0, 6.75084, 0)
